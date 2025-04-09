@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure S3 CORS Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SECURE S3 CORS DEPLOYMENT<span class="cursor"></span></h1>
+        </header>
+        
+        <main>
+            <section class="feature">
+                <h2>SYSTEM BRIEFING</h2>
+                <p>This is a secure static website hosted on Amazon S3 with CORS enabled. The deployment demonstrates implementation of a properly configured cross-origin resource sharing architecture using infrastructure as code.</p>
+                <p>[ SYSTEM STATUS: <span id="status">OPERATIONAL</span> ]</p>
+            </section>
+            
+            <section class="cors-demo">
+                <h2>CORS PROTOCOL TEST</h2>
+                <p>Initialize cross-origin request verification protocol:</p>
+                <button id="cors-test-button">EXECUTE CORS TEST</button>
+                <div id="cors-result" class="result-box">
+                    &gt; Awaiting command execution...
+                </div>
+            </section>
+
+            <section class="feature">
+                <h2>SECURITY IMPLEMENTATION</h2>
+                <p>This deployment includes the following security controls:</p>
+                <ul>
+                    <li>CORS configuration with authorized origins</li>
+                    <li>Public read access restricted to specific resources</li>
+                    <li>Headers exposure control</li>
+                    <li>SSL/TLS implementation recommendations</li>
+                </ul>
+                <p>[ SECURITY LEVEL: <span id="security-level">ALPHA</span> ]</p>
+            </section>
+        </main>
+        
+        <footer>
+            <p>SYSTEM_ID: S3-CORS-SECURE-DEPLOYMENT</p>
+            <p>[ TIMESTAMP: <span id="timestamp"></span> ]</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
