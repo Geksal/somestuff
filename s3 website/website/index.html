@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - CyberShield</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color);
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .error-message {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+        
+        .error-details {
+            max-width: 600px;
+            margin-bottom: 30px;
+            color: #aaa;
+        }
+        
+        .error-terminal {
+            background-color: var(--terminal-bg);
+            border-radius: 6px;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            text-align: left;
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+        }
+        
+        .error-terminal p {
+            margin-bottom: 8px;
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+        }
+        
+        .home-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 255, 65, 0.3);
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 255, 65, 0.4);
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(0, 255, 65, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to {transform: rotate(360deg);}
+        }
+        
+        /* Matrix background behind the scenes */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix-canvas"></canvas>
+    
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-message">SECURITY BREACH DETECTED</div>
+        
+        <div class="error-terminal">
+            <p>> Scanning system...</p>
+            <p>> Error: The requested resource could not be found</p>
+            <p>> Analyzing security logs...</p>
+            <p>> No suspicious activity detected</p>
+            <p>> Initializing recovery protocol <span class="loading"></span></p>
+            <p>> Routing to secure homepage...</p>
+        </div>
+        
+        <div class="error-details">
+            The page you're looking for might have been moved, deleted, or never existed. 
+            Don't worry - this is a common occurrence and not necessarily a security issue.
+        </div>
+        
+        <a href="index.html" class="home-btn">Return to Secure Zone</a>
+    </div>
+    
+    <script>
+        // Matrix background effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Characters to be used in the matrix rain
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+=?@#&%';
+        const fontSize = 14;
+        const columns = Math.floor(canvas.width / fontSize);
+        
+        // Array to store the y position of each column
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        // Drawing the matrix rain
+        function drawMatrix() {
+            // Semi-transparent black to create fade effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff41'; // Matrix green
+            ctx.font = `${fontSize}px monospace`;
+            
+            // Loop through each drop
+            for (let i = 0; i < drops.length; i++) {
+                // Get random character
+                const char = characters.charAt(Math.floor(Math.random() * characters.length));
+                
+                // Draw the character
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                
+                // Move the drop down
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        // Run the matrix animation
+        setInterval(drawMatrix, 50);
+
+        // Resize handler for canvas
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Auto-redirect after 10 seconds
+        setTimeout(function() {
+            window.location.href = 'index.html';
+        }, 10000);
+    </script>
+</body>
+</html>
